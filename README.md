@@ -55,7 +55,7 @@ Want to clear folders? (Y/N): Yes!
 ```
 ### Papers
 
-The paper about the application and related approach was submitted at ER2022.
+The paper about the application and related approach is going to be submitted at ER2022.
 
 
 
