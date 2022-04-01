@@ -12,7 +12,7 @@ The application is written in **Python**, requires Python 3.6+, and has been tes
 
 - First, start by cloning this repository.
 ```
-git clone https://github.com/
+git clone https://github.com/unibz-core/Mining-CMs-Patterns
 ```
 
 - We recommend to use `virtualenv` for development.
