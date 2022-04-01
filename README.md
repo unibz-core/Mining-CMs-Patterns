@@ -1,10 +1,10 @@
-# Mining-CM-Patterns
+# Mining-CMs-Patterns
 
-**Mining-CM-Patterns** is an application for mining patterns in conceptual models encoded in different conceptual modeling language. 
+**Mining-CMs-Patterns** is an application for mining patterns in conceptual models encoded in different conceptual modeling language. 
 
 The current version of the application is able to parse and mine any **UML Class Diagram Model** encoded in a `{.json}` format, which can be generated through the [OntoUML](https://github.com/OntoUML/ontouml-vp-plugin) plugin for [Visual Paradigm](https://www.visual-paradigm.com/download/community.jsp) (free community edition).
 
-The main scope of **Mining-CM-Patterns** is to support knowledge engineers in the empirical discovery of modeling patterns. 
+The main scope of **Mining-CMs-Patterns** is to support knowledge engineers in the empirical discovery of modeling patterns. 
 
 The application is written in **Python**, requires Python 3.6+, and has been tested on *Mac OSX*.
 
@@ -32,7 +32,7 @@ cd scripts
 python3 main.py
 ```
 
-## Get Started with Mining-CM-Patterns
+## Get Started with Mining-CMs-Patterns
 
 - Interact with the command line by providing the required inputs, e.g.:
 ```
