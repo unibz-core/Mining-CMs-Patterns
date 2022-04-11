@@ -47,7 +47,8 @@ def nocard(x):
     final10_ = [[re.sub(r'NoneNoneNone', '', item) for item in x] for x in final9]
     final10__ = [[re.sub(r'NoneNone', '', item) for item in x] for x in final10_]
     final10___ = [[re.sub(r'\"None', '"', item) for item in x] for x in final10__]
-    final10 = [[re.sub(r'\n', '', item) for item in x] for x in final10___ ]
+    final10____ = [[re.sub(r'[0-9]m', 'm', item) for item in x] for x in final10___] #
+    final10 = [[re.sub(r'\n', '', item) for item in x] for x in final10____]
     ###filter_cardinalities###
     itemSetList = final10 #if we want cardinalities, just keep "final"
     r = re.compile('->')

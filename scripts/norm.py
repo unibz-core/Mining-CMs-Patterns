@@ -281,15 +281,18 @@ drop_empty = [ele for ele in filter5___ if ele != []]
 filter6 = [[re.sub(r',is', '-is', item) for item in sublist] for sublist in drop_empty]
 ins = re.compile('^((?!instantiation@@).)*$') #- keep: @@
 not_contain_in = [[item for item in sublist if ins.findall(item)] for sublist in filter6]
-chrz = re.compile('^((?!characterization@@).)*$') #- keep: @@ 
-not_contain_chrz = [[item for item in sublist if chrz.findall(item)] for sublist in not_contain_in]
-filter7 = [[re.sub(r'->', ',->', item) for item in sublist] for sublist in not_contain_chrz]
+#chrz = re.compile('^((?!characterization@@).)*$') #- keep: @@ 
+#not_contain_chrz = [[item for item in sublist if chrz.findall(item)] for sublist in not_contain_in]
+#filter7 = [[re.sub(r'->', ',->', item) for item in sublist] for sublist in not_contain_chrz]
+filter7 = [[re.sub(r'->', ',->', item) for item in sublist] for sublist in not_contain_in]
+
 
 #recover elements without indexes
 n = re.compile('^((?!_(.*?)_).)*$')
 not_contain = [[item for item in sublist if n.findall(item)] for sublist in filter7]
 flatten_not = [val for sublist in not_contain for val in sublist]
-final_not_sorted = not_contain_chrz+flatten_not
+#final_not_sorted = not_contain_chrz+flatten_not
+final_not_sorted = not_contain_in+flatten_not
 final = list(map(natsorted, final_not_sorted))
 
 deriv = re.compile('^((?!derivation).)*$') 
