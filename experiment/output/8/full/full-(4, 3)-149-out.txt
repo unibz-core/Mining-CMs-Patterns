@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+quality_0_;
+relator_0_;
+quality_0_ -> relator_0_  [label=characterization];
+}

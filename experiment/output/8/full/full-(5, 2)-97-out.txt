@@ -1,0 +1,10 @@
+strict digraph  {
+rankdir=BT;
+mode_0_;
+mode_1_;
+mode_2_;
+mode_3_;
+mode_0_ -> mode_1_  [label=ISA];
+mode_2_ -> mode_1_  [label=ISA];
+mode_3_ -> mode_1_  [label=ISA];
+}

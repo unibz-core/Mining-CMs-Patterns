@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+roleMixin_0_;
+relator_0_;
+roleMixin_0_ -> relator_0_  [label=mediation];
+}

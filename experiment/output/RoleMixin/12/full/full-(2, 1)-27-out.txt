@@ -1,0 +1,16 @@
+strict digraph  {
+rankdir=BT;
+kind_0_;
+kind_1_;
+kind_2_;
+kind_3_;
+kind_4_;
+kind_5_;
+kind_6_;
+kind_0_ -> kind_1_  [label=ISA];
+kind_2_ -> kind_0_  [label=ISA];
+kind_3_ -> kind_0_  [label=ISA];
+kind_4_ -> kind_0_  [label=ISA];
+kind_5_ -> kind_0_  [label=ISA];
+kind_6_ -> kind_0_  [label=ISA];
+}

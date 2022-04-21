@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+situation_0_;
+event_0_;
+situation_0_ -> event_0_  [label="pre-state"];
+}

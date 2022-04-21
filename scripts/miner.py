@@ -73,28 +73,41 @@ occurrences = [item[0] for item in patterns_filter]
 #THE ACCURACY is the number in "pattern filters" divided for the total amount of graphs, generated from subgraph generation
 patternLists = natsorted(sum(patterns_filter0, []))
 finalPattern = [item for i, item in enumerate(patternLists) if i == 0 or i == len(patternLists) or patternLists[i - 1] != item]
+# print(patterns_filter0)
+# print(gSet)
 
-final = []
-flag_ = 0
-for y in patterns_filter0:
-    output = []
-    final.append(output)
-    for z in gSet:
-        if(all(x in z for x in y)):
-            flag_ = 1
-            output.append(flag_)
-sums = [sum(sublist) for sublist in final]
+# final = []
+# flag_ = 0
+# for y in patterns_filter0:
+#     output = []
+#     final.append(output)
+#     for z in gSet:
+#         if(all(x in z for x in y)):
+#             flag_ = 1
+#             output.append(flag_)
+# sums = [sum(sublist) for sublist in final]
+# # for y in patterns_filter0:
+# #     print(y)
+# print(sums)
 
-final0 = []
-flag_0 = 0
+sums = []
 for y in patterns_filter0:
-    output0 = []
-    final0.append(output0)
-    for z in sgSet:
-        if(all(x in z for x in y)):
-            flag_0 = 1
-            output0.append(flag_0)
-sums0 = [sum(sublist) for sublist in final0]
+    out = [sum(1 for i in range(len(x)) if x[i:i+len(y)]==y) for x in gSet]
+    out0 = [x for x in out if x != 0]
+    out1 = len(out0)
+    sums.append(out1)
+
+# final0 = []
+# flag_0 = 0
+# for y in patterns_filter0:
+#     output0 = []
+#     final0.append(output0)
+#     for z in sgSet:
+#         if(all(x in z for x in y)):
+#             flag_0 = 1
+#             output0.append(flag_0)
+# sums0 = [sum(sublist) for sublist in final0]
+
 
 mTuple = []
 for i,j in list(zip(occurrences,sums)):
@@ -110,6 +123,7 @@ def metrics(x):
         return occurrences
 
 metr_ = metrics(path_)      
+
 
 # #make this FOR EACH DERIVED PATTERN, ONE BY ONE! FROM HERE
 graphGenerationEdges =  [[re.sub(r'->', ' -> ', item) for item in x] for x in patterns_filter0]
@@ -132,6 +146,7 @@ for i in firstOutput:
 
 directedGraphFrequency = list(zip(metr_,directedGraph))
 
+
 ###(WITH_INDEX)
 unconnectedGraphs = []
 for n,i in zip(metr_,directedGraph):
@@ -148,6 +163,8 @@ for (n,g) in unconnectedGraphs: #here last filter
 
 noEdge = [g for n,g in noEdge_f]
 frequencies = [n for n,g in noEdge_f]
+
+
 
 # #####filter-unconnected#####
 lostNodes = [[node for node in g.nodes() if g.in_degree(node)==0 and g.out_degree(node)==0] for (n,g) in noEdge_f]
@@ -192,12 +209,16 @@ for n,line in zip(frequencies, RelabeledGraphs):
     if line.number_of_edges() != 0:
         intermediateOutput.append((n,line))
 
+
+
 import json
 finalFrequencies = [f for f,i in intermediateOutput]
 finalGraphs = [[x for x in i.edges(data=True)] for f,i in intermediateOutput]
 finalGraphs0 = [json.dumps(i) for i in finalGraphs]
 
+
 finalCombo = tuple(zip(finalGraphs0,finalFrequencies))
+
 
 from collections import OrderedDict
 d = OrderedDict()

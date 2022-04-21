@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+collective_0_;
+kind_0_;
+collective_0_ -> kind_0_;
+}

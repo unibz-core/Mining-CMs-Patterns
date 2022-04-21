@@ -1,0 +1,8 @@
+strict digraph  {
+rankdir=BT;
+phase_0_;
+kind_0_;
+subkind_0_;
+phase_0_ -> kind_0_  [label=ISA];
+subkind_0_ -> kind_0_  [label=ISA];
+}

@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+event_0_;
+event_1_;
+event_0_ -> event_1_  [label=historicalDependence];
+}

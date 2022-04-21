@@ -1,0 +1,12 @@
+strict digraph  {
+rankdir=BT;
+role_0_;
+role_1_;
+role_2_;
+role_3_;
+role_4_;
+role_0_ -> role_1_  [label=ISA];
+role_2_ -> role_0_  [label=ISA];
+role_3_ -> role_0_  [label=ISA];
+role_4_ -> role_0_  [label=ISA];
+}

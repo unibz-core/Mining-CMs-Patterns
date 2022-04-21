@@ -1,0 +1,8 @@
+strict digraph  {
+rankdir=BT;
+kind_0_;
+mode_0_;
+mode_1_;
+kind_0_ -> mode_0_  [label=characterization];
+kind_0_ -> mode_1_  [label=characterization];
+}

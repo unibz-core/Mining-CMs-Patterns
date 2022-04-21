@@ -1,0 +1,8 @@
+strict digraph  {
+rankdir=BT;
+relator_0_;
+relator_1_;
+role_0_;
+relator_0_ -> relator_1_  [label=ISA];
+relator_0_ -> role_0_  [label=mediation];
+}

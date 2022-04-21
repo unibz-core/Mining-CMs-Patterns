@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+historicalRole_0_;
+participation_0_;
+historicalRole_0_ -> participation_0_  [label=induces];
+}

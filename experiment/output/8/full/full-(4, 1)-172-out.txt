@@ -1,0 +1,8 @@
+strict digraph  {
+rankdir=BT;
+type_0_;
+type_1_;
+type_2_;
+type_0_ -> type_1_  [label=ISA];
+type_2_ -> type_1_  [label=ISA];
+}

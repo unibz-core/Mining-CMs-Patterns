@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+event_0_;
+roleMixin_0_;
+event_0_ -> roleMixin_0_  [label=participation];
+}

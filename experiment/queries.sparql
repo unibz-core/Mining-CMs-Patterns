@@ -1,0 +1,276 @@
+# Subkind Pattern (No Generalization Sets): A class specialized by at least 2 subkinds
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT (SAMPLE(?project) as ?project) ?parent (SAMPLE(?parentName) as ?parentName) (GROUP_CONCAT(?childName ; separator=", ") AS ?childrenNames)
+WHERE { 
+    ?gen ontouml:general ?parent .
+    ?gen ontouml:specific ?child .
+    ?parent ontouml:stereotype ontouml:kind .
+    ?child ontouml:stereotype ontouml:subkind .
+    ?parent ontouml:name ?parentName .
+    ?child ontouml:name ?childName .
+ 	  ?project ontouml:project ?parent .
+}
+GROUP BY ?parent
+HAVING (COUNT(?child) > 1)
+
+# How many models have subkind patterns
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT distinct ?project (SAMPLE(?projectName) as ?projectName)(count(?parent) as ?count)
+WHERE {
+    ?project ontouml:project ?parent . 
+    ?project ontouml:name ?projectName .
+    {
+        SELECT ?parent (SAMPLE(?project) as ?project) 
+        WHERE { 
+            ?gen ontouml:general ?parent .
+            ?gen ontouml:specific ?child .
+            ?parent ontouml:stereotype ontouml:kind .
+            ?child ontouml:stereotype ontouml:subkind .
+            ?parent ontouml:name ?parentName .
+            ?child ontouml:name ?childName .
+            ?project ontouml:project ?parent
+        }
+        GROUP BY ?parent
+        HAVING (COUNT(?child) > 1)
+    }    
+}
+GROUP BY ?project
+
+#Phase Pattern (No Generalization Sets): A kind specialized by at least 2 phases
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT (SAMPLE(?project) as ?project) ?parent (SAMPLE(?parentName) as ?parentName) (GROUP_CONCAT(?childName ; separator=", ") AS ?childrenNames)
+WHERE { 
+    ?gen ontouml:general ?parent .
+    ?gen ontouml:specific ?child .
+    ?parent ontouml:stereotype ontouml:kind .
+    ?child ontouml:stereotype ontouml:phase .
+    ?parent ontouml:name ?parentName .
+    ?child ontouml:name ?childName .
+ 	?project ontouml:project ?parent .
+}
+GROUP BY ?parent
+HAVING (COUNT(?child) > 1)
+
+# How many models have phase patterns
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT distinct ?project (SAMPLE(?projectName) as ?projectName)(count(?parent) as ?count)
+WHERE {
+    ?project ontouml:project ?parent . 
+    ?project ontouml:name ?projectName .
+    {
+        SELECT ?parent (SAMPLE(?project) as ?project) 
+        WHERE { 
+            ?gen ontouml:general ?parent .
+            ?gen ontouml:specific ?child .
+            ?parent ontouml:stereotype ontouml:kind .
+            ?child ontouml:stereotype ontouml:phase .
+            ?parent ontouml:name ?parentName .
+            ?child ontouml:name ?childName .
+            ?project ontouml:project ?parent
+        }
+        GROUP BY ?parent
+        HAVING (COUNT(?child) > 1)
+    }    
+}
+GROUP BY ?project
+
+# Category pattern: a category specialized by at least 2 kinds
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT (SAMPLE(?project) as ?project) ?parent (SAMPLE(?parentName) as ?parentName) (GROUP_CONCAT(?childName ; separator=", ") AS ?childrenNames)
+WHERE { 
+    ?gen ontouml:general ?parent .
+    ?gen ontouml:specific ?child .
+    ?parent ontouml:stereotype ontouml:category .
+    ?child ontouml:stereotype ontouml:kind .
+    ?parent ontouml:name ?parentName .
+    ?child ontouml:name ?childName .
+ 	?project ontouml:project ?parent .
+}
+GROUP BY ?parent
+HAVING (COUNT(?child) > 1)
+
+# How many models have category patterns
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT distinct ?project (SAMPLE(?projectName) as ?projectName)(count(?parent) as ?count)
+WHERE {
+    ?project ontouml:project ?parent . 
+    ?project ontouml:name ?projectName .
+    {
+        SELECT ?parent (SAMPLE(?project) as ?project) 
+        WHERE { 
+            ?gen ontouml:general ?parent .
+            ?gen ontouml:specific ?child .
+            ?parent ontouml:stereotype ontouml:category .
+            ?child ontouml:stereotype ontouml:kind .
+            ?parent ontouml:name ?parentName .
+            ?child ontouml:name ?childName .
+            ?project ontouml:project ?parent
+        }
+        GROUP BY ?parent
+        HAVING (COUNT(?child) > 1)
+    }    
+}
+GROUP BY ?project
+
+# RoleMixin Pattern: a role that directly specializes a kind and a roleMixin
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT DISTINCT *
+WHERE { 
+    ?gen1 ontouml:general ?kind .
+    ?gen1 ontouml:specific ?role .
+    ?gen2 ontouml:general ?roleMixin .
+    ?gen2 ontouml:specific ?role .
+    ?kind ontouml:name ?kindName.
+    ?role ontouml:name ?roleName .
+    ?roleMixin ontouml:name ?roleMixinName .
+    ?kind ontouml:stereotype ontouml:kind .
+    ?role ontouml:stereotype ontouml:role .    
+    ?roleMixin ontouml:stereotype ontouml:roleMixin .
+    ?project ontouml:project ?kind
+    FILTER(?role!=?kind && ?role!=?roleMixinName && ?roleMixinName!=?kind)
+} 
+
+# How many models have roleMixin patterns
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT DISTINCT ?project (SAMPLE(?projectName) as ?projectName)(count(*) as ?count)
+WHERE { 
+    ?gen1 ontouml:general ?kind .
+    ?gen1 ontouml:specific ?role .
+    ?gen2 ontouml:general ?roleMixin .
+    ?gen2 ontouml:specific ?role .
+    ?kind ontouml:name ?kindName.
+    ?role ontouml:name ?roleName .
+    ?roleMixin ontouml:name ?roleMixinName .
+    ?kind ontouml:stereotype ontouml:kind .
+    ?role ontouml:stereotype ontouml:role .    
+    ?roleMixin ontouml:stereotype ontouml:roleMixin .
+    ?project ontouml:project ?kind .
+    ?project ontouml:name ?projectName .
+    FILTER(?role!=?kind && ?role!=?roleMixinName && ?roleMixinName!=?kind)
+}
+GROUP BY ?project
+
+# Characterization pattern (assuming modes are always in the source of characterizations, as defined in the metamodel)
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT DISTINCT ?project ?projectName ?characterization ?modeName ?characterizedName
+WHERE {
+    ?project ontouml:project ?mode .
+    ?project ontouml:name ?projectName .
+
+    ?mode ontouml:name ?modeName .
+    ?characterized ontouml:name ?characterizedName .
+    ?mode ontouml:stereotype ontouml:mode .
+    ?characterized ontouml:stereotype ontouml:roleMixin .
+    ?characterization ontouml:stereotype ontouml:characterization .
+    ?characterization ontouml:sourceEnd ?sourceEnd .
+    ?sourceEnd ontouml:propertyType ?mode .
+    ?characterization ontouml:targetEnd ?targetEnd .
+    ?targetEnd ontouml:propertyType ?characterized .
+} 
+
+
+# How many models have characterization patterns
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT DISTINCT ?project (SAMPLE(?projectName) as ?projectName) (COUNT(DISTINCT *) as ?count)
+WHERE {
+    ?project ontouml:project ?mode .
+    ?project ontouml:name ?projectName .
+
+    ?mode ontouml:name ?modeName .
+    ?characterized ontouml:name ?characterizedName .
+    ?mode ontouml:stereotype ontouml:mode .
+    ?characterized ontouml:stereotype ontouml:roleMixin .
+    ?characterization ontouml:stereotype ontouml:characterization .
+    ?characterization ontouml:sourceEnd ?sourceEnd .
+    ?sourceEnd ontouml:propertyType ?mode .
+    ?characterization ontouml:targetEnd ?targetEnd .
+    ?targetEnd ontouml:propertyType ?characterized .
+} 
+GROUP BY ?project
+
+# Relator Pattern (assuming relators on the source and roles on the target of mediations, as defined in the metamodel)
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT (SAMPLE(?projectName) as ?projectName) ?relator (SAMPLE(?relatorName) as ?relatorName) (GROUP_CONCAT(distinct ?mediatedName; separator=", ") as ?mediatedName)
+WHERE {
+    ?project ontouml:project ?relator .
+    ?mediation ontouml:sourceEnd ?relatorEnd .
+    ?mediation ontouml:targetEnd ?mediatedEnd .
+    ?relatorEnd ontouml:propertyType ?relator .
+    ?mediatedEnd ontouml:propertyType ?mediated .
+    ?relator ontouml:stereotype ontouml:relator .
+    ?mediated ontouml:stereotype ontouml:role .
+    ?mediation ontouml:stereotype ontouml:mediation .
+    ?relator ontouml:name ?relatorName.
+    ?mediated ontouml:name ?mediatedName .
+    ?project ontouml:name ?projectName .
+} 
+GROUP BY ?relator
+HAVING(COUNT(?mediation) > 1)
+
+# How many models have relator patterns
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT ?project (SAMPLE(?projectName) as ?projectName) (COUNT(*) as ?count)
+WHERE {
+    ?project ontouml:name ?projectName .
+    {
+        SELECT ?relator (COUNT(?mediation) as ?mediations) (SAMPLE(?project) as ?project) 
+        WHERE {
+            ?project ontouml:project ?relator .
+            ?mediation ontouml:sourceEnd ?relatorEnd .
+            ?mediation ontouml:targetEnd ?mediatedEnd .
+            ?relatorEnd ontouml:propertyType ?relator .
+            ?mediatedEnd ontouml:propertyType ?mediated .
+            ?relator ontouml:stereotype ontouml:relator .
+            ?mediated ontouml:stereotype ontouml:role .
+            ?mediation ontouml:stereotype ontouml:mediation .
+        } 
+        GROUP BY ?relator
+        HAVING(?mediations > 1)
+    }
+}
+GROUP BY ?project
+
+
+# Which stereotyepes do modes characterize:
+
+PREFIX ontouml: <https://purl.org/ontouml-metamodel#>
+
+SELECT ?characterizedStereotype (COUNT(*) as ?count)
+WHERE {
+    ?class1 ontouml:name ?mode.
+    ?class1 ontouml:stereotype ontouml:mode .
+    ?class2 ontouml:name ?characterized .
+    ?class2 ontouml:stereotype ?characterizedStereotype .
+    ?rel1 ontouml:stereotype ontouml:characterization .
+    ?rel1 ontouml:sourceEnd ?prop1 .
+	?prop1 ontouml:propertyType ?class1 .
+    ?rel1 ontouml:targetEnd ?prop2 .
+	?prop2 ontouml:propertyType ?class2 .
+    OPTIONAL {
+        ?rel1 ontouml:name ?characterization .
+    }
+    FILTER(?class1!=?class2)
+} 
+GROUP BY ?characterizedStereotype

@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+collective_0_;
+collective_1_;
+collective_0_ -> collective_1_  [label=subCollectionOf];
+}

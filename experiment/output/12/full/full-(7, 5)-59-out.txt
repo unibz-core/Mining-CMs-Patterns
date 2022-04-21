@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+phase_0_;
+relator_0_;
+phase_0_ -> relator_0_  [label=ISA];
+}

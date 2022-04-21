@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+mode_0_;
+mode_1_;
+mode_0_ -> mode_1_  [label=ISA];
+}

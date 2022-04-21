@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+quality_0_;
+datatype_0_;
+quality_0_ -> datatype_0_  [label=structuration];
+}

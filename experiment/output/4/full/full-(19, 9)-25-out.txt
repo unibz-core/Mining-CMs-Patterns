@@ -1,0 +1,6 @@
+strict digraph  {
+rankdir=BT;
+subkind_0_;
+relator_0_;
+subkind_0_ -> relator_0_  [label=ISA];
+}
