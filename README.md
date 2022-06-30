@@ -55,7 +55,7 @@ Want to clear folders? (Y/N): Yes!
 ```
 ### Papers
 
-The paper about the application and related approach is going to be submitted at ER2022.
+Fumagalli, Mattia; Sales, Tiago Princes; Guizzardi, Giancarlo; Pattern Discovery in Conceptual Models Using Frequent Itemset Mining,  ER 2022, International conference on conceptual modeling
 
 
 
